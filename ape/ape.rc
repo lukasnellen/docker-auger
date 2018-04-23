@@ -1,0 +1,33 @@
+[DEFAULT]
+base = /auger/install/ape
+build = /tmp/ape-build-%(user)s
+apejobs = 8
+
+[ape]
+jobs = %(apejobs)s
+mirrors = mx us
+distfiles = /auger/distfiles
+#pwFile = %(home)s/.apepw.auger
+
+#[package externals]
+#dependencies.append = mysql 
+
+#[package aires]
+#fc = gfortran-6
+
+#[package root]
+#enable.append = builtin-freetype
+
+#[package root5]
+#enable.append = builtin-freetype
+
+#[package root6]
+#enable.append = builtin-freetype
+
+#[package boost]
+#configureArgs.delete = --without-python
+#infoVariables.append = makeCmd makeArgs
+#makeArgs.append =--ignore-site-config
+
+[package cmake3]
+configureArgs.append = --parallel=%(apejobs)s
