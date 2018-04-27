@@ -3,6 +3,6 @@ FROM $baseimage
 
 VOLUME ["/auger/dist/offline"]
 
-COPY ./entrypoint-externals.sh /entrypoint-externals.sh 
+COPY ./entrypoint-externals*.sh /
 ENTRYPOINT [ "/entrypoint-externals.sh" ]
 CMD [ "bash" ]

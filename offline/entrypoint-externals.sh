@@ -10,7 +10,7 @@ export CM="cmake /auger/dist/offline -Dprefix=/auger/install/offline"
 echo "Execute \$CM for default cmake configuration"
 
 if [ -n "${RHDEVTOOLSET}" ]; then
-     exec scl enable ${RHDEVTOOLSET} "$*"
+     exec scl enable ${RHDEVTOOLSET} /entrypoint-externals-stage2.sh "$@"
 else
-    exec "$*"
+    exec /entrypoint-externals-stage2.sh "$@"
 fi
