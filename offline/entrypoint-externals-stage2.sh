@@ -15,7 +15,6 @@ case "$1" in
 	;;
 esac
 
-echo stage $stage
 
 if [ $stage -eq 0 ]; then
     exec "$@"
