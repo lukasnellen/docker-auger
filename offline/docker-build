@@ -1,0 +1,14 @@
+#! /bin/bash
+#
+# Build docker image for ape testing / installing from sysdev image
+#
+# docker-build [[repo] branch] rev
+#
+# Arguments:
+# $rev:    revision of tag
+# $branch: ape branch, defaults to master
+# $repo:   ape repository, defaults to ape.git
+
+docker_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+docker build  -t lukasnellen/augeroffl:$1 --build-arg baseimage=lukasnellen/augerdev:$1 ${docker_dir}

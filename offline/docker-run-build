@@ -1,0 +1,17 @@
+#! /bin/bash
+#
+# Arguments:
+#   $1: tag revision
+
+rev=$1
+shift
+
+docker volume create -o type=tmpfs -o device=tmpfs -o o=exec,nosuid,nodev tmp-${rev} || true
+docker volume create install-${rev} || true
+
+docker run --rm -ti --name auger-offl-${rev} \
+       --mount src=tmp-${rev},dst=/tmp \
+       --mount src=install-${rev},dst=/auger/install \
+       --mount type=bind,src=$HOME/auger/software/eclipse/Ape/distfiles,dst=/auger/distfiles,readonly \
+       --mount type=bind,src=$HOME/auger/software/eclipse/Offline,dst=/auger/dist/offline,readonly \
+       lukasnellen/augeroffl:${rev} $@
