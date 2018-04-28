@@ -3,6 +3,7 @@
 set -e
 
 stage=0
+check=no
 case "$1" in
     config)
 	stage=1
@@ -10,8 +11,16 @@ case "$1" in
     build)
 	stage=2
 	;;
+    check)
+	stage=2
+	check=yes
+	;;
     install)
 	stage=3
+	;;
+    check-install)
+	stage=3
+	check=yes
 	;;
 esac
 
@@ -26,9 +35,14 @@ if [ $stage -ge 1 ]; then
 fi
 
 if [ $stage -ge 2 ]; then
-    make "$@"
+    cmake --build . -- "$@"
+fi
+
+if [ $check = "yes" ]; then
+    cmake --build . -- test-progs "$@"
+    ctest
 fi
 
 if [ $stage -ge 3 ]; then
-    make install
+    cmake --build . -- install
 fi
