@@ -26,4 +26,6 @@ ENV APERC=/auger/dist/ape.rc USER=auger
 
 WORKDIR /auger/dist/ape
 
+COPY ./entrypoint-ape.sh /
+ENTRYPOINT [ "/entrypoint-ape.sh" ]
 CMD [ "bash" ]
